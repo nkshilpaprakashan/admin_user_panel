@@ -1,0 +1,89 @@
+<h1>Admin Panel</h1>
+<!-- <p><%-fulldata %></p> -->
+
+<% if(fulldata!=null){ %>
+
+    <form action="/addnewuser" method="POST">
+        <button>ADD NEW USER</button>
+    </form>
+
+    <form action="/searching" method="POST">
+
+        <input type="text" id="search" name="search">
+           
+        <input type="submit" value="search">  
+        
+    </form>
+
+    <form action="/clearsearch" method="POST">
+    <button>Clear Search</button>
+    </form>
+   
+        
+    
+
+<table width="50%" rules="all" style="border: 1px solid black;">
+    <tr>
+        <td style="background-color:aquamarine">First Name</td>
+        <td style="background-color:aquamarine">Last Name</td>
+        <td style="background-color:aquamarine">E-mail</td>
+        <td style="background-color:aquamarine">Password</td>
+        <!-- <td style="background-color:aquamarine">Confirm Password</td> -->
+        <td style="background-color:aquamarine">Edit</td>
+        <td style="background-color:aquamarine">Delete</td>
+
+    </tr>
+
+    <% if(fulldata.length>0){
+        
+
+        for(let i=0;i<fulldata.length;i++){
+            %>
+            
+             <tr>
+                <td ><%=fulldata[i].first_name%></a></td>
+                <td><a href="/edit" style="text-decoration:none; color:black"><%=fulldata[i].last_name%></a></td>
+                <td><a href="/edit" style="text-decoration:none; color:black"><%=fulldata[i].email%></a></td>
+                <td><a href="/edit" style="text-decoration:none; color:black"><%=fulldata[i].password%></a></td>
+                <!-- <td><a href="/edit" style="text-decoration:none; color:black"><%=fulldata[i].confirmpassword%></a></td> -->
+                <td>
+                    <button><a href="/edits/<%=fulldata[i]._id%>" style="text-decoration:none">Edit</a></button>
+                </td>
+                <td>
+                
+                    <button><a href="/delete/<%=fulldata[i]._id%>" style="text-decoration:none">Delete</a></button>
+               
+
+                </td>
+               
+             </tr>
+            <%
+        }
+
+    }else{
+        %>
+
+        <td colspan="5">Users not found</td>
+        <%
+    }
+    %>
+</table>
+
+<% } %>
+
+<br><br>
+
+
+
+
+
+
+
+
+<button><a href="/logout" style="text-decoration:none">Logout</a></button>
+
+<script>
+  function editrecord(val){
+    window.location.href="/edit"+val;
+  }
+</script>
